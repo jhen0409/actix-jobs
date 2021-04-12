@@ -28,7 +28,7 @@ impl WorkManager {
         let workers = consumer.workers();
         for _worker in 0..workers {
             let consumer = consumer.clone();
-            let addr = Actor::start_in_arbiter(&Arbiter::new().handle(), move |_| consumer);
+            let addr = Actor::start_in_arbiter(&Arbiter::new(), move |_| consumer);
             self.consumers.push(addr.recipient());
         }
         self
